@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.122.0">
+    <title>상품 주문</title>
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" integrity="sha384ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="/css/jumbotron-narrow.css" rel="stylesheet">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sign-in/">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/headers/">
+
+    <!-- BootStrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+
+
+
+
+    <style>
+
+
+        .fieldError {
+            border-color: #bd2130;
+        }
+
+        .h1 {
+            text-align: center; /* 텍스트를 가운데 정렬합니다. */
+            color: #712cf9; /* 글자 색상을 변경합니다. */
+            margin-bottom: 20px; /* 하단 여백을 추가합니다. */
+            font-size: 2.5rem; /* 폰트 크기를 크게 조정합니다. */
+            font-weight: bold; /* 글자를 굵게 표시합니다. */
+            text-transform: uppercase; /* 텍스트를 대문자로 변환합니다. */
+            letter-spacing: 2px; /* 글자 간격을 조정합니다. */
+        }
+        .center-content {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .btn-fixed-width {
+            width: 90px; /* 적절한 너비를 설정하세요 */
+        }
+
+
+        .center-text {
+            text-align: center;
+        }
+
+        .footer-font .nav-footer-item .nav-link {
+            font-size: 14px;
+        }
+
+        .footer-font {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-footer-item {
+            margin-left: auto;
+        }
+
+        .nav-footer-item .nav-item {
+            margin-right: 10px; /* 요소 사이의 간격 조절 */
+        }
+
+        .text-body-secondary {
+            text-align: left;
+        }
+
+        .btn-bd-primary {
+            --bd-violet-bg: #712cf9;
+            --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+            --bs-btn-font-weight: 600;
+            --bs-btn-color: var(--bs-white);
+            --bs-btn-bg: var(--bd-violet-bg);
+            --bs-btn-border-color: var(--bd-violet-bg);
+            --bs-btn-hover-color: var(--bs-white);
+            --bs-btn-hover-bg: #6528e0;
+            --bs-btn-hover-border-color: #6528e0;
+            --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+            --bs-btn-active-color: var(--bs-btn-hover-color);
+            --bs-btn-active-bg: #5a23c8;
+            --bs-btn-active-border-color: #5a23c8;
+
+            /* 추가된 부분 */
+            width: 200px; /* 버튼 너비 조정 */
+            margin: 0 auto; /* 가운데 정렬 */
+            display: block; /* 블록 요소로 설정하여 가로폭 조정 가능 */
+        }
+
+        .btn-custom {
+            --bd-custom-bg: #F26B6B;
+            --bd-custom-rgb: 242, 107, 107;
+            --bs-btn-font-weight: 600;
+            --bs-btn-bg: var(--bd-custom-bg);
+            --bs-btn-border-color: var(--bd-custom-bg);
+            --bs-btn-hover-bg: #D64545;
+            --bs-btn-hover-border-color: #D64545;
+            --bs-btn-active-bg: #A33030;
+            --bs-btn-active-border-color: #A33030;
+            width: auto; /* 버튼 너비 자동으로 설정 */
+            max-width: 200px; /* 버튼 최대 너비 설정 */
+            margin: 0 auto; /* 가운데 정렬 */
+            display: inline-block; /* 인라인 블록 요소로 설정하여 가로폭 자동 조정 */
+        }
+        .nav-link {
+            color: #712cf9;
+        }
+
+        .nav-white {
+            color :#FFFFFF;
+        }
+
+        .btn-turn {
+            background-color: #8ccd00;
+            --bs-btn-font-weight: 600;
+            --bs-btn-color: var(--bs-white);
+            color: white;
+        }
+
+        .discount-value {
+            font-weight: bold; /* Bold체 적용 */
+            font-size: 1.1em; /* 폰트 크기 조정 */
+        }
+
+    </style>
+</head>
+<body>
+<div class="credit-card">
+<div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+        <a href="/login" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+            <img class="bi me-2" width="30" height="30" th:src="@{/images/home100.png}">
+            <span class="fs-2 fw-bold">북, 그럼</span>
+        </a>
+
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a href="/login" class="nav-link text-dark">홈 화면</a></li>
+            <li class="nav-item"><a href="/home/mypage/basket" class="nav-link text-dark">장바구니</a></li>
+            <li class="nav-item"><a href="/home/mypage/orders" class="nav-link nav-white" style="background-color: #7013F2;"  aria-current="page">상품 주문</a></li>
+            <li class="nav-item"><a href="/home/mypage/wishlist" class="nav-link text-dark">찜 목록</a></li>
+            <li class="nav-item"><a href="/home/mypage/getAllOrders" class="nav-link text-dark" >주문 내역</a></li>
+            <li class="nav-item"><a href="/home/mypage" class="nav-link text-dark">마이 페이지</a></li>
+        </ul>
+    </header>
+</div>
+
+<div class="container"> <!-- Wrap the table in a container -->
+    <div class="d-flex justify-content-center align-items-center"> <!-- Apply Flexbox classes -->
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>ISBN</th>
+                <th>이미지</th>
+                <th>제목</th>
+                <th>저자/출판사</th>
+                <th>출판일</th>
+                <th>price</th>
+                <th>기타</th>
+            </tr>
+            </thead>
+
+            <tr th:each="orderbook:${orderBooks}">
+                <td>[[${orderbook.isbn}]]</td>
+                <td><img th:src="${orderbook.image}" th:alt="${orderbook.name}" width="100"></td>
+                <td><a th:href="${orderbook.link}">[[${orderbook.name}]]</a></td>
+                <td>[[${orderbook.author}]]/[[${orderbook.publisher}]]</td>
+                <td>[[${orderbook.pubdate}]]</td>
+                <td>
+                    <span class="discount-value">[[${orderbook.price}]]</span>
+                </td>
+                <td>
+                    <div class="text-center">
+                    <a th:href="@{'/delete_orderBook?isbn=' + ${orderbook.isbn}}" class="btn btn-primary btn-custom">상품 취소하기</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+    <div class="text-center">
+        <td><h4>Total : <span class="discount-value" th:text="${totalOrderAmount}"></span></h4></td>
+    </div>
+
+
+    <div class="container">
+        <form role="form" action="/saveOrder" method="POST">
+            <div class="mb-3">
+                <label for="card-number" class="form-label">Card Number</label>
+                <input type="text" class="form-control" id="card-number" name = "Card_Number" placeholder="Enter card number" required>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="mb-3">
+                        <label for="expiry-date" class="form-label">Expiry Date</label>
+                        <input type="text" class="form-control" id="expiry-date" name = "Expiry_Date" placeholder="MM/YY" required>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="mb-3">
+                        <label for="cvv" class="form-label">CVV</label>
+                        <input type="text" class="form-control" id="cvv" name="CVV" placeholder="CVV" required>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="card-holder" class="form-label">Card Holder</label>
+                <input type="text" class="form-control" id="card-holder" name="Card_Holder" placeholder="Enter card holder name" required>
+            </div>
+
+
+            <div class="container"> <!-- 부모 요소 -->
+                <div class="d-flex justify-content-center align-items-center"> <!-- Flexbox를 사용하여 가운데 정렬 -->
+                    <div class="row justify-content-center">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-6 text-center">
+                                    <button type="submit" class="btn btn-primary btn-bd-primary">Pay Now</button> <!-- 첫 번째 버튼 -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-Lms72j3lhq9FrDcKH6AgCczI9zcNuDnTqQ/Njjbd4z+YdXTBtbGiS7D5MjF70otf" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></script>
+
+</div>
+</body>
+
+<footer>
+    <div class="container">
+        <footer class="d-flex flex-wrap justify-content-end align-items-center py-3 my-4 border-top footer-font">
+            <p class="col-md-4 mb-0 text-body-secondary">&copy; 2024 Jaemin_project</p>
+
+
+            <ul class="nav nav-pills nav-footer-item">
+                <li class="nav-item"><a href="/login" class="nav-link text-body-secondary">홈 화면</a></li>
+                <li class="nav-item"><a href="/home/mypage/basket" class="nav-link text-body-secondary">장바구니</a></li>
+                <li class="nav-item"><a href="/home/mypage/orders" class="nav-link text-body-secondary">상품 주문</a></li>
+                <li class="nav-item"><a href="/home/mypage/wishlist" class="nav-link text-body-secondary">찜 목록</a></li>
+                <li class="nav-item"><a href="/home/mypage/getAllOrders" class="nav-link text-body-secondary">주문 내역</a></li>
+                <li class="nav-item"><a href="/home/mypage" class="nav-link text-body-secondary">마이 페이지</a></li>
+            </ul>
+
+        </footer>
+    </div>
+</footer>
+</html>

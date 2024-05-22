@@ -1,0 +1,2 @@
+-- -- book 테이블에 ISBN 컬럼에 대한 고유 제약 조건 추가
+-- ALTER TABLE book ADD CONSTRAINT unique_isbn UNIQUE (isbn);

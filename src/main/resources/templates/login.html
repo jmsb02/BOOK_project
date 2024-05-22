@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <script src="../assets/js/color-modes.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.122.0">
+    <title>LOGIN</title>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sign-in/">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/jumbotron-narrow.css" rel="stylesheet">
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+
+        .b-example-divider {
+            width: 100%;
+            height: 3rem;
+            background-color: rgba(0, 0, 0, .1);
+            border: solid rgba(0, 0, 0, .15);
+            border-width: 1px 0;
+            box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+        }
+
+        .b-example-vr {
+            flex-shrink: 0;
+            width: 1.5rem;
+            height: 100vh;
+        }
+
+        .bi {
+            vertical-align: -.125em;
+            fill: currentColor;
+        }
+
+        .nav-scroller {
+            position: relative;
+            z-index: 2;
+            height: 2.75rem;
+            overflow-y: hidden;
+        }
+
+        .nav-scroller .nav {
+            display: flex;
+            flex-wrap: nowrap;
+            padding-bottom: 1rem;
+            margin-top: -1px;
+            overflow-x: auto;
+            text-align: center;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .btn-bd-primary {
+            --bd-violet-bg: #712cf9;
+            --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+            --bs-btn-font-weight: 600;
+            --bs-btn-color: var(--bs-white);
+            --bs-btn-bg: var(--bd-violet-bg);
+            --bs-btn-border-color: var(--bd-violet-bg);
+            --bs-btn-hover-color: var(--bs-white);
+            --bs-btn-hover-bg: #6528e0;
+            --bs-btn-hover-border-color: #6528e0;
+            --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+            --bs-btn-active-color: var(--bs-btn-hover-color);
+            --bs-btn-active-bg: #5a23c8;
+            --bs-btn-active-border-color: #5a23c8;
+        }
+
+        .bd-mode-toggle {
+            z-index: 1500;
+        }
+
+        /* Sign up 버튼 크기 조절 */
+        .btn-signup {
+            font-size: 16px; /* 폰트 크기 조절 */
+            padding: 10px 20px; /* 내부 여백 조절 */
+        }
+
+        /* 이미지와 제목 사이 여백 조절 */
+        .image-container {
+            margin-top: 50px; /* 원하는 만큼의 여백을 지정합니다. */
+        }
+    </style>
+</head>
+
+<body class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+<main class="form-signin w-100" style="max-width: 400px;">
+    <div class="container px-4 mt-4">
+        <form action="/login" method="post" th:object="${loginForm}">
+            <div class="image-container text-center mb-3"> <!-- 이미지와 제목을 감싸는 div 요소에 margin-top 추가 -->
+                <img class="mb-2" th:src="@{images/unlock512.png}" alt="" width="120" height="120">
+                <h1 class="h3 mb-3 fw-bold">정보를 입력해주세요</h1> <!-- 제목의 텍스트 중앙 정렬 설정 -->
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="email" th:field="*{email}" class="form-control" placeholder="name@example.com"
+                       th:class="${#fields.hasErrors('email')}? 'form-control fieldError' : 'form-control'">
+                <!-- 유효성 검사 오류 메시지를 표시 -->
+                <p th:if="${#fields.hasErrors('email')}" class="text-danger" th:errors="*{email}"></p>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" placeholder="Password" th:field="*{password}"
+                       th:class="${#fields.hasErrors('password')}? 'form-control fieldError' : 'form-control'">
+                <!-- 유효성 검사 오류 메시지를 표시 -->
+                <p th:if="${#fields.hasErrors('password')}" class="text-danger" th:errors="*{password}"></p>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 py-2 btn-bd-primary">Sign in</button>
+        </form>
+
+        <div class="mt-3 text-center"> <!-- 정보 입력 폼과 하단 링크 사이의 공백 조정 -->
+            <p class="mb-0">회원 가입을 하시겠습니까?</p>
+            <a href="/signup" class="btn btn-primary btn-sm py-2 btn-bd-primary mt-2 btn-signup">Sign up</a>
+        </div>
+        <footer class="fixed-bottom text-center mt-3"> <!-- 하단 공백 조정 -->
+            <p class="mt-5 mb-3 text-body-secondary">&copy; 2024-2027</p>
+        </footer>
+    </div>
+</main>
+
+<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const emailInput = document.querySelector('input[type="email"]');
+        const passwordInput = document.querySelector('input[type="password"]');
+
+        // 이메일 입력란에 대한 초기 placeholder 설정
+        emailInput.value = "이메일을 입력하세요";
+        emailInput.style.color = "gray"; // placeholder 색상 설정
+
+        // 비밀번호 입력란에 대한 초기 placeholder 설정
+        passwordInput.value = "Password";
+        passwordInput.style.color = "gray"; // placeholder 색상 설정
+
+        // 이메일 입력란에 대한 focus 이벤트 처리
+        emailInput.addEventListener("focus", function () {
+            if (emailInput.value === "이메일을 입력하세요") {
+                emailInput.value = "";
+                emailInput.style.color = "black"; // 입력 텍스트 색상 설정
+            }
+        });
+
+        // 이메일 입력란에 대한 blur 이벤트 처리
+        emailInput.addEventListener("blur", function () {
+            if (emailInput.value === "") {
+                emailInput.value = "이메일을 입력하세요";
+                emailInput.style.color = "gray"; // placeholder 색상 설정
+            }
+        });
+
+        // 비밀번호 입력란에 대한 focus 이벤트 처리
+        passwordInput.addEventListener("focus", function () {
+            if (passwordInput.value === "Password") {
+                passwordInput.value = "";
+                passwordInput.style.color = "black"; // 입력 텍스트 색상 설정
+            }
+        });
+
+        // 비밀번호 입력란에 대한 blur 이벤트 처리
+        passwordInput.addEventListener("blur", function () {
+            if (passwordInput.value === "") {
+                passwordInput.value = "Password";
+                passwordInput.style.color = "gray"; // placeholder 색상 설정
+            }
+        });
+    });
+</script>
+</body>
+
+</html>

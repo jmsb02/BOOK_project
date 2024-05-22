@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="https://getbootstrap.com/docs/5.3/assets/js/color-modes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous">
+    </script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.122.0">
+    <title>Album example · Bootstrap v5.3</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css" integrity="sha384
+ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/jumbotron-narrow.css" rel="stylesheet">
+    <title>회원 가입</title>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sign-in/">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+
+    <link href="/docs/5.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" href="/docs/5.3/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+    <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="manifest" href="/docs/5.3/assets/img/favicons/manifest.json">
+    <link rel="mask-icon" href="/docs/5.3/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
+    <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon.ico">
+    <meta name="theme-color" content="#712cf9">
+
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+
+        .b-example-divider {
+            width: 100%;
+            height: 3rem;
+            background-color: rgba(0, 0, 0, .1);
+            border: solid rgba(0, 0, 0, .15);
+            border-width: 1px 0;
+            box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+        }
+
+        .b-example-vr {
+            flex-shrink: 0;
+            width: 1.5rem;
+            height: 100vh;
+        }
+
+        .bi {
+            vertical-align: -.125em;
+            fill: currentColor;
+        }
+
+        .nav-scroller {
+            position: relative;
+            z-index: 2;
+            height: 2.75rem;
+            overflow-y: hidden;
+        }
+
+        .nav-scroller .nav {
+            display: flex;
+            flex-wrap: nowrap;
+            padding-bottom: 1rem;
+            margin-top: -1px;
+            overflow-x: auto;
+            text-align: center;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .btn-bd-primary {
+            --bd-violet-bg: #712cf9;
+            --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+            --bs-btn-font-weight: 600;
+            --bs-btn-color: var(--bs-white);
+            --bs-btn-bg: var(--bd-violet-bg);
+            --bs-btn-border-color: var(--bd-violet-bg);
+            --bs-btn-hover-color: var(--bs-white);
+            --bs-btn-hover-bg: #6528e0;
+            --bs-btn-hover-border-color: #6528e0;
+            --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+            --bs-btn-active-color: var(--bs-btn-hover-color);
+            --bs-btn-active-bg: #5a23c8;
+            --bs-btn-active-border-color: #5a23c8;
+        }
+
+        .bd-mode-toggle {
+            z-index: 1500;
+        }
+
+        .bd-mode-toggle .dropdown-menu .active .bi {
+            display: block !important;
+        }
+
+        .footer-font .nav-footer-item .nav-link {
+            font-size: 14px;
+        }
+
+        .footer-font {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .nav-footer-item {
+            margin-left: auto;
+        }
+
+        .nav-footer-item .nav-item {
+            margin-right: 10px; /* 요소 사이의 간격 조절 */
+        }
+
+        @media (min-width: 768px) {
+            .footer-font {
+                font-size: 16px; /* Adjust the font size for larger screens */
+            }
+        }
+
+        .text-body-secondary {
+            text-align: left;
+        }
+
+        .nav-white {
+            color :#FFFFFF;
+        }
+
+    </style>
+
+
+</head>
+<body>
+
+
+<div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+    <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
+            id="bd-theme"
+            type="button"
+            aria-expanded="false"
+            data-bs-toggle="dropdown"
+            aria-label="Toggle theme (auto)">
+        <svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#circle-half"></use></svg>
+        <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
+        <li>
+            <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#sun-fill"></use></svg>
+                Light
+                <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+            </button>
+        </li>
+        <li>
+            <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#moon-stars-fill"></use></svg>
+                Dark
+                <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+            </button>
+        </li>
+        <li>
+            <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
+                <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#circle-half"></use></svg>
+                Auto
+                <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+            </button>
+        </li>
+    </ul>
+</div>
+
+<main th:fragment="bodyHeader">
+
+    <section class="py-5 text-center container">
+        <div class="row py-lg-3">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="fw-light" style="font-weight: bold;">북, 그럼</h1>
+                <p class="lead text-body-secondary">
+                    북, 그럼은 부끄럼을 탐색하는 독특한 서점입니다.<br>
+                    책을 통해 자아를 발견하는 여정이 <br>
+                    부끄러움을 살펴보는 것과 닮았다는 것을 깨달았죠. <br>
+                    우리는 부끄러움을 이겨내며 더 나은 모습을 찾아가고자 합니다. <br>
+                </p>
+
+
+                <p th:if="${errorMessage}" th:text="${errorMessage}" style="color: red;"></p>
+                <form action="/list/Booklist" method="GET" class="input-group mb-3 align-items-center" style="height: 3rem; ">
+                    <input type="text" name="query" class="form-control" placeholder="책 검색..." aria-label="책 검색" aria-describedby="button-addon">
+                    <button class="btn btn-primary btn-bd-primary" type="submit" id="button-addon">검색</button>
+                </form>
+
+            </div>
+        </div>
+    </section>
+
+    <div class="album py-1 bg-body-tertiary">
+        <div class="container">
+            <div class="row row-cols-3 row-cols-sm-2 row-cols-md-3 g-3">
+                <div id="basketForms" class="col">
+
+                    <div class="card shadow-sm">
+                        <img class="bd-placeholder-img card-img-top" th:src="@{../images/자바 ORM 표준 JPA 프로그래밍.jpeg}" alt="자바 ORM 표준 JPA 프로그래밍" style="width: auto; height: 502px;">
+                        <div class="card-body">
+                            <p class="card-text"><strong>자바 ORM 표준 JPA 프로그래밍</strong><br>(스프링 데이터 예제 프로젝트로 배우는 전자정부 표준 데이터베이스 프레임워크)</br></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group d-flex justify-content-center align-items-center">
+                                    <a href="https://search.shopping.naver.com/book/catalog/32436007738"
+                                       class="btn btn-sm btn-outline-secondary" style="height: 33px; font-size: 14px; margin-left: 10px; min-width: 100px; vertical-align: middle;">View</a>
+                                    <form id="addToBasketForm1" action="/home/basket" method="GET">
+                                        <button id="addToBasketButton1" class="btn btn-sm btn-outline-secondary" style="height: 33px; font-size: 14px; min-width: 100px;">Basket</button>
+                                        <input type="hidden" id="isbnInput1" name="isbn" value="9788960777330">
+                                    </form>
+                                </div>
+
+                                <div class="d-flex align-items-center">
+                                    <form id="addToBasketForm1_1" action="/savedBookinWishlist" method="GET">
+                                        <button id="addToBasketButton1_1" class="btn btn-sm btn-outline-secondary" style="height: 33px; font-size: 14px; min-width: 100px;">찜 하기</button>
+                                        <input type="hidden" id="isbnInput1_1" name="isbn" value="9788960777330">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img class="bd-placeholder-img card-img-top" th:src="@{../images/CleanCode.jpeg}" alt="Clean Code 클린 코드" style="width: auto; height: 525px;">
+                        <div class="card-body">
+                            <p class="card-text"><strong>Clean Code 클린 코드</strong><br>애자일 소프트웨어 장인 정신</br></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group d-flex justify-content-center align-items-center">
+                                    <a href="https://search.shopping.naver.com/book/catalog/32474195676"
+                                       class="btn btn-sm btn-outline-secondary" style="height: 33px; font-size: 14px;  min-width: 100px;">View</a>
+
+                                    <form id="addToBasketForm2" action="/home/basket" method="GET">
+                                        <button id="addToBasketButton2" class="btn btn-sm btn-outline-secondary" style="height: 33px; font-size: 14px; min-width: 100px;">Basket</button>
+                                        <input type="hidden" id="isbnInput2" name="isbn" value="9788966260959">
+                                    </form>
+                                </div>
+                                <div class="d-flex align-items-center">
+
+                                    <form id="addToBasketForm2_1" action="/savedBookinWishlist" method="GET">
+                                        <button id="addToBasketButton2_1" class="btn btn-sm btn-outline-secondary" style="height: 33px; font-size: 14px; min-width: 100px;">찜 하기</button>
+                                        <input type="hidden" id="isbnInput2_1" name="isbn" value="9788966260959">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <a href="https://search.shopping.naver.com/book/catalog/32463364883">
+                            <img class="bd-placeholder-img card-img-top" th:src="@{../images/토비의 스프링.jpg}" alt="토비의 스프링 3.1 Vol 1: 스프링의 이해와 원리" style="width: auto; height: 525px;">
+                        </a>
+                        <div class="card-body">
+                            <p class="card-text"><strong>토비의 스프링 3.1 Vol 1: 스프링의 이해와 원리</strong><br>스프링의 이해와 원리</br></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group d-flex justify-content-center align-items-center">
+                                    <a href="https://search.shopping.naver.com/book/catalog/32463364883"
+                                       class="btn btn-sm btn-outline-secondary" style="height: 33px; font-size: 14px; min-width: 100px;">View</a>
+
+                                    <form id="addToBasketForm3" action="/home/basket" method="GET">
+                                        <button id="addToBasketButton3" class="btn btn-sm btn-outline-secondary" style="height: 33px; font-size: 14px; min-width: 100px;">Basket</button>
+                                        <input type="hidden" id="isbnInput3" name="isbn" value="9788960773417">
+                                    </form>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <form id="addToBasketForm3_1" action="/savedBookinWishlist" method="GET">
+                                        <button id="addToBasketButton3_1" class="btn btn-sm btn-outline-secondary" style="height: 33px; font-size: 14px; min-width: 100px;">찜 하기</button>
+                                        <input type="hidden" id="isbnInput3_1" name="isbn" value="9788960773417">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img class="bd-placeholder-img card-img-top" th:src="@{../images/프그자.jpeg}" alt="프로그래머스 코딩 테스트 문제 풀이 전략: 자바 편" style="width: auto; height: 525px;">
+                        <div class="card-body">
+                            <p class="card-text"><strong>프로그래머스 코딩 테스트 문제 풀이 전략: 자바 편</strong><br> (핵심 개념, 79개 문제풀이, 코딩전문역량인증시험(PCCP) 대비까지!)</br></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group d-flex justify-content-center align-items-center">
+                                    <a href="https://search.shopping.naver.com/book/catalog/37828230627"
+                                       class="btn btn-sm btn-outline-secondary" style="height: 33px; font-size: 14px;  min-width: 100px;">View</a>
+
+                                    <form id="addToBasketForm4" action="/home/basket" method="GET">
+                                        <button id="addToBasketButton4" class="btn btn-sm btn-outline-secondary" style="height: 33px; font-size: 14px; min-width: 100px;">Basket</button>
+                                        <input type="hidden" id="isbnInput4" name="isbn" value="9791140702916">
+                                    </form>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <form id="addToBasketForm4_1" action="/savedBookinWishlist" method="GET">
+                                        <button id="addToBasketButton4_1" class="btn btn-sm btn-outline-secondary" style="height: 33px; font-size: 14px; min-width: 100px;">찜 하기</button>
+                                        <input type="hidden" id="isbnInput4_1" name="isbn" value="9791140702916">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img class="bd-placeholder-img card-img-top" th:src="@{../images/도메인주도개발.jpeg}" alt="프도메인 주도 개발 시작하기: DDD 핵심 개념 정리부터 구현까지" style="width: auto; height: 526px;">
+                        <div class="card-body">
+                            <p class="card-text"><strong>도메인 주도 개발 시작하기: DDD 핵심 개념 정리부터 구현까지</strong><br>DDD 핵심 개념 정리부터 구현까지</br></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group d-flex justify-content-center align-items-center">
+                                    <a href="https://search.shopping.naver.com/book/catalog/32436316743"
+                                       class="btn btn-sm btn-outline-secondary" style="height: 33px; font-size: 14px; min-width: 100px;">View</a>
+
+                                    <form id="addToBasketForm5" action="/home/basket" method="GET">
+                                        <button id="addToBasketButton5" class="btn btn-sm btn-outline-secondary" style="height: 33px; font-size: 14px; min-width: 100px;">Basket</button>
+                                        <input type="hidden" id="isbnInput5" name="isbn" value="9791162245385">
+                                    </form>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <form id="addToBasketForm5_1" action="/savedBookinWishlist" method="GET">
+                                        <button id="addToBasketButton5_1" class="btn btn-sm btn-outline-secondary" style="height: 33px; font-size: 14px; min-width: 100px;">찜 하기</button>
+                                        <input type="hidden" id="isbnInput5_1" name="isbn" value="9791162245385">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img class="bd-placeholder-img card-img-top" th:src="@{../images/운영체제.jpg}" alt="운영체제" style="width: auto; height: 551px;">
+                        <div class="card-body">
+                            <p class="card-text"><strong>운영체제</strong><br>제10판</br></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group d-flex justify-content-center align-items-center">
+                                    <a href="https://search.shopping.naver.com/book/catalog/32473952371"
+                                       class="btn btn-sm btn-outline-secondary" style="height: 33px; font-size: 14px; min-width: 100px;">View</a>
+
+                                    <form id="addToBasketForm6" action="/home/basket" method="GET">
+                                        <button id="addToBasketButton6" class="btn btn-sm btn-outline-secondary" style="height: 33px; font-size: 14px; min-width: 100px;">Basket</button>
+                                        <input type="hidden" id="isbnInput6" name="isbn" value="9791185475578">
+                                    </form>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <form id="addToBasketForm6_1" action="/savedBookinWishlist" method="GET">
+                                        <button id="addToBasketButton6_1" class="btn btn-sm btn-outline-secondary" style="height: 33px; font-size: 14px; min-width: 100px;">찜 하기</button>
+                                        <input type="hidden" id="isbnInput6_1" name="isbn" value="9791185475578">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img class="bd-placeholder-img card-img-top" th:src="@{../images/우아한개발.jpeg}" alt="요즘 우아한 개발" style="width: auto; height: 525px;">
+                        <div class="card-body">
+                            <p class="card-text"><strong>요즘 우아한 개발</strong><br>기획하고 개발하고 회고하라</br></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group d-flex justify-content-center align-items-center">
+                                    <a href="https://search.shopping.naver.com/book/catalog/42743587619"
+                                       class="btn btn-sm btn-outline-secondary" style="height: 33px; font-size: 14px; min-width: 100px;">View</a>
+
+                                    <form id="addToBasketForm7" action="/home/basket" method="GET">
+                                        <button id="addToBasketButton7" class="btn btn-sm btn-outline-secondary" style="height: 33px; font-size: 14px; min-width: 100px;">Basket</button>
+                                        <input type="hidden" id="isbnInput7" name="isbn" value="9791191905458">
+                                    </form>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <form id="addToBasketForm7_1" action="/savedBookinWishlist" method="GET">
+                                        <button id="addToBasketButton7_1" class="btn btn-sm btn-outline-secondary" style="height: 33px; font-size: 14px; min-width: 100px;">찜 하기</button>
+                                        <input type="hidden" id="isbnInput7_1" name="isbn" value="9791191905458">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img class="bd-placeholder-img card-img-top" th:src="@{../images/이코.jpg}" alt="이것이 취업을 위한 코딩 테스트다 with 파이썬" style="width: auto; height: 525px;">
+                        <div class="card-body">
+                            <p class="card-text"><strong>이것이 취업을 위한 코딩 테스트다 with 파이썬</strong><br>취업과 이직을 결정하는 알고리즘 인터뷰 완벽 가이드</br></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group d-flex justify-content-center align-items-center">
+                                    <a href="https://search.shopping.naver.com/book/catalog/32441237189"
+                                       class="btn btn-sm btn-outline-secondary" style="height: 33px; font-size: 14px; min-width: 100px;">View</a>
+                                    <form id="addToBasketForm8" action="/home/basket" method="GET">
+                                        <button id="addToBasketButton8" class="btn btn-sm btn-outline-secondary" style="height: 33px; font-size: 14px; min-width: 100px;">Basket</button>
+                                        <input type="hidden" id="isbnInput8" name="isbn" value="9791162243077">
+                                    </form>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <form id="addToBasketForm8_1" action="/savedBookinWishlist" method="GET">
+                                        <button id="addToBasketButton8_1" class="btn btn-sm btn-outline-secondary" style="height: 33px; font-size: 14px; min-width: 100px;">찜 하기</button>
+                                        <input type="hidden" id="isbnInput8_1" name="isbn" value="9791162243077">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img class="bd-placeholder-img card-img-top" th:src="@{../images/http.jpg}" alt="HTTP 완벽 가이드" style="width: auto; height: 526px;">
+                        <div class="card-body">
+                            <p class="card-text"><strong>HTTP 완벽 가이드</strong><br>웹은 어떻게 동작하는가</br></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group d-flex justify-content-center align-items-center">
+                                    <a href="https://search.shopping.naver.com/book/catalog/32461143685"
+                                       class="btn btn-sm btn-outline-secondary" style="height: 33px; font-size: 14px; min-width: 100px;">View</a>
+
+                                    <form id="addToBasketForm9" action="/home/basket" method="GET">
+                                        <button id="addToBasketButton9" class="btn btn-sm btn-outline-secondary" style="height: 33px; font-size: 14px; min-width: 100px;">Basket</button>
+                                        <input type="hidden" id="isbnInput9" name="isbn" value="9788966261208">
+                                    </form>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <form id="addToBasketForm9_1" action="/savedBookinWishlist" method="GET">
+                                        <button id="addToBasketButton9_1" class="btn btn-sm btn-outline-secondary" style="height: 33px; font-size: 14px; min-width: 100px;">찜 하기</button>
+                                        <input type="hidden" id="isbnInput9_1" name="isbn" value="9788966261208">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top footer-font">
+                <p class="col-md-4 mb-0 text-body-secondary">© 2024 Jaemin_project</p>
+
+                <ul class="nav nav-pills nav-footer-item">
+                    <li class="nav-item"><a href="/login" class="nav-link text-body-secondary">홈 화면</a></li>
+                    <li class="nav-item"><a href="/home/mypage/basket" class="nav-link text-body-secondary">장바구니</a></li>
+                    <li class="nav-item"><a href="/home/mypage/orders" class="nav-link text-body-secondary">상품 주문</a></li>
+                    <li class="nav-item"><a href="/home/mypage/wishlist" class="nav-link text-body-secondary">찜 목록</a></li>
+                    <li class="nav-item"><a href="/home/mypage/getAllOrders" class="nav-link text-body-secondary">주문 내역</a></li>
+                    <li class="nav-item"><a href="/home/mypage" class="nav-link text-body-secondary">마이 페이지</a></li>
+                </ul>
+
+            </footer>
+        </div>
+    </footer>
+    </div>
+</main>
+
+<!-- 검색 관련 js 코드 -->
+<script>
+    // 페이지 로드 시 실행되는 함수
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // 오류 메시지 요소 가져오기
+        var errorMessage = document.getElementById("errorMessage");
+        // 초기화
+        errorMessage.innerText = "";
+    });
+
+    // 검색 폼 제출 시 실행되는 함수
+    document.getElementById("searchForm").addEventListener("submit", function(event) {
+        var searchInput = document.getElementById("searchInput").value.trim();
+        var errorMessage = document.getElementById("errorMessage");
+
+        if (!searchInput) {
+            errorMessage.innerText = "검색어를 입력하세요.";
+            event.preventDefault(); // 폼 제출을 막습니다.
+        } else {
+            errorMessage.innerText = ""; // 오류 메시지를 초기화합니다.
+        }
+    });
+</script>
+
+
+<button class="heartButton btn btn-outline-danger" onclick="alert('Button clicked!');">Button</button>
+
+<!-- 하트 버튼 관련 js 코드-->
+<script>
+    function change_btn(e) {
+        var btns = document.querySelectorAll(".heartButton");
+        btns.forEach(function (btn, i) {
+            if (e.currentTarget == btn) {
+                if (btn.classList.contains("active")) {
+                    btn.classList.remove("active");
+                } else {
+                    btn.classList.add("active");
+                }
+            }
+        });
+    }
+
+</script>
+
+
+
+<!-- basket 버튼 isbn 보내는 함수 -->
+<script>
+    document.getElementById('basketForms').addEventListener('click', function(event) {
+        var target = event.target;
+        // 클릭된 요소가 addToBasketButton인지 확인합니다.
+        if (target.classList.contains('btn-outline-secondary')) {
+            event.preventDefault(); // 기본 동작 중지
+            var isbn = target.closest('div.card').querySelector('.isbnInput').value; // 해당 폼의 ISBN 값을 가져옵니다.
+            var form = target.closest('form'); // 클릭된 버튼이 속한 폼을 찾습니다.
+            form.action = "/home/basket?isbn=" + isbn; // Form의 action 속성에 ISBN을 추가합니다.
+            form.submit(); // 폼을 서밋합니다.
+        }
+    });
+</script>
+
+<!— basket 버튼 관련 js 코드 —>
+
+
+</body>
+</html>
