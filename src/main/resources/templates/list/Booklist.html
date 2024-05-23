@@ -182,8 +182,9 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="a
 
   <!-- 현재 페이지 주변의 페이지 번호 -->
   <span th:each="pageNumber : ${#numbers.sequence((currentPage - 2 > 0 ? currentPage - 2 : 1), (currentPage + 2 <= totalPages ? currentPage + 2 : totalPages))}">
-    <a th:href="@{/list/Booklist(query=${query},page=${pageNumber})}" th:text="${pageNumber}"></a>
-  </span>
+        <a th:if="${pageNumber != currentPage}" th:href="@{/list/Booklist(query=${query},page=${pageNumber})}" th:text="${pageNumber}"></a>
+        <span th:if="${pageNumber == currentPage}" th:text="${pageNumber}" style="font-weight: bold;"></span>
+    </span>
 
   <!-- 다음 버튼 -->
   <a th:if="${currentPage < totalPages}" th:href="@{/list/Booklist(query=${query},page=${currentPage+1})}">다음</a>
