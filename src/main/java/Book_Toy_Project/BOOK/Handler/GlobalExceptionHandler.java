@@ -98,6 +98,12 @@ public class GlobalExceptionHandler {
         return modelAndView;
     }
 
+    @ExceptionHandler(DuplicateWishlistException.class)
+    private ModelAndView handleDuplicateWishlistException(DuplicateWishlistException e) {
+        ModelAndView modelAndView = new ModelAndView("error/error");
+        modelAndView.addObject("errorMessage", e.getMessage());
+        return modelAndView;
+    }
 
 }
 

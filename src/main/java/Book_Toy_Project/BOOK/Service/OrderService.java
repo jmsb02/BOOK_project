@@ -54,18 +54,16 @@ public class OrderService {
         return order;
     }
 
-    public Order getOrderByOrderBook(Order findOrder, List<OrderBook> orderBooks) {
-        for (OrderBook orderBook : orderBooks) {
-            findOrder.setName(orderBook.getName());
-            findOrder.setPublisher(orderBook.getPublisher());
-            findOrder.setPrice(orderBook.getPrice());
-            findOrder.setAuthor(orderBook.getAuthor());
-            findOrder.setImage(orderBook.getImage());
-            findOrder.setLink(orderBook.getLink());
-            findOrder.setIsbn(orderBook.getIsbn());
-            findOrder.setCount(1); // 주문 수량은 1로 가정
-            findOrder.setPubdate(orderBook.getPubdate());
-        }
+    public Order getOrderByOrderBook(Order findOrder, OrderBook orderBook) {
+        findOrder.setName(orderBook.getName());
+        findOrder.setPublisher(orderBook.getPublisher());
+        findOrder.setPrice(orderBook.getPrice());
+        findOrder.setAuthor(orderBook.getAuthor());
+        findOrder.setImage(orderBook.getImage());
+        findOrder.setLink(orderBook.getLink());
+        findOrder.setIsbn(orderBook.getIsbn());
+        findOrder.setCount(1); // 주문 수량은 1로 가정
+        findOrder.setPubdate(orderBook.getPubdate());
         return findOrder;
     }
 }

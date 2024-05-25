@@ -5,7 +5,6 @@ import Book_Toy_Project.BOOK.Entity.OrderBook;
 import Book_Toy_Project.BOOK.Repository.OrderBookRepository;
 import Book_Toy_Project.BOOK.Repository.OrderRepository;
 import jakarta.persistence.EntityNotFoundException;
-import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

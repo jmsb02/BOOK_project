@@ -1,10 +1,14 @@
 package Book_Toy_Project.BOOK.Service;
 
+import Book_Toy_Project.BOOK.Cookie_Session.SessionConst;
 import Book_Toy_Project.BOOK.Entity.Member;
 import Book_Toy_Project.BOOK.Exception.UsernameAlreadyExistsException;
 import Book_Toy_Project.BOOK.Form.MemberForm;
 import Book_Toy_Project.BOOK.Repository.MemberRepository;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +18,7 @@ import java.util.List;
 @Service //비즈니스 로직
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
+@Slf4j
 public class MemberService {
 
     private final MemberRepository memberRepository;
@@ -42,6 +47,14 @@ public class MemberService {
             return passwordEncoder.matches(password,member.getPassword());
         }
         return false;
+    }
+
+    public void processLoginSuccess(HttpServletRequest request, Member findMember) {
+        //세션이 있으면 세션 반환, 없으면 신규 세션 생성
+        HttpSession session = request.getSession();
+
+        //세션에 로그인 회원 정보 보관
+        session.setAttribute(SessionConst.LOGIN_MEMBER, findMember);
     }
 
     public Member getMember(MemberForm form, String hashedPassword) {

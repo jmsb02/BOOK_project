@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+
 @Entity
 @Table(name = "orders")
 @Getter @Setter
@@ -30,8 +31,6 @@ public class Order {
     private String cardNumber;
     private String expiryDate;
 
-    //유일성을 지님 - unique - true
-    @Column(name = "cvv", unique = true)
     private String cvv;
     private String cardHolder;
 

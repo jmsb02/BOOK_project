@@ -1,7 +1,9 @@
 package Book_Toy_Project.BOOK.Service;
 
+import Book_Toy_Project.BOOK.Entity.Book;
 import Book_Toy_Project.BOOK.Entity.OrderBook;
 import Book_Toy_Project.BOOK.Exception.DuplicateOrderException;
+import Book_Toy_Project.BOOK.Repository.BookRepository;
 import Book_Toy_Project.BOOK.Repository.OrderBookRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @Slf4j
@@ -17,6 +20,8 @@ import java.util.List;
 public class OrderBookService {
 
     private final OrderBookRepository orderBookRepository;
+    private final BookService bookService;
+    private final BookRepository bookRepository;
 
     @Transactional
     public void saveOrderBook(OrderBook orderBook) {
@@ -41,6 +46,31 @@ public class OrderBookService {
         }
     }
 
+    @Transactional
+    public void processOrderBook(String isbn) {
+
+        Book book = bookRepository.findByIsbn(isbn);
+        log.info("book.isbn = {}", book.getIsbn());
+        if (book == null) {
+            throw new NoSuchElementException("ISBN에 해당하는 책이 존재하지 않습니다.");
+        }
+
+        OrderBook orderBook = getOrderBook(book);
+
+        if (orderBookRepository.findByIsbn(isbn) != null) {
+            throw new DuplicateOrderException("이미 주문하기 화면에 해당 상품이 존재합니다.");
+        }
+
+        try {
+            saveOrderBook(orderBook);
+            bookService.deleteBook(book.getIsbn());
+        } catch (Exception e) {
+            log.error("주문 저장을 실패하였습니다");
+            throw new IllegalStateException(e.getMessage());
+        }
+    }
+
+
     public int calculateTotalOrderAmount(List<OrderBook> orderBooks) {
         int totalOrderBookAmount = 0;
         for (OrderBook orderBook : orderBooks) {
@@ -49,4 +79,17 @@ public class OrderBookService {
         return totalOrderBookAmount;
     }
 
+    public OrderBook getOrderBook(Book book) {
+        OrderBook orderBook = new OrderBook();
+        orderBook.setName(book.getTitle());
+        orderBook.setPublisher(book.getPublisher());
+        orderBook.setPrice(book.getPrice());
+        orderBook.setAuthor(book.getAuthor());
+        orderBook.setImage(book.getImage());
+        orderBook.setLink(book.getLink());
+        orderBook.setIsbn(book.getIsbn());
+        orderBook.setCount(1); // 주문 수량은 1로 가정
+        orderBook.setPubdate(book.getPubdate());
+        return orderBook;
+    }
 }

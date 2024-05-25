@@ -1,10 +1,8 @@
 package Book_Toy_Project.BOOK.Controller;
 
-import Book_Toy_Project.BOOK.Entity.Order;
 import Book_Toy_Project.BOOK.Entity.OrderBook;
 import Book_Toy_Project.BOOK.Exception.DuplicateOrderException;
 import Book_Toy_Project.BOOK.Repository.OrderBookRepository;
-import Book_Toy_Project.BOOK.Repository.OrderRepository;
 import Book_Toy_Project.BOOK.Service.OrderManagementService;
 import Book_Toy_Project.BOOK.Service.OrderService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,7 +24,6 @@ public class OrderController {
 
     private final OrderManagementService orderManagementService;
 
-    private final OrderRepository orderRepository;
 
     private final OrderBookRepository orderBookRepository;
 
@@ -47,22 +44,19 @@ public class OrderController {
         log.info("Card_Number = {}, Expiry_Date = {}, CVV = {}, Card_Holder = {}",
                 card_number, expiryDate, cvv, cardHolder);
 
-        Order order = new Order();
-        //주문 생성
-        Order findOrder = orderService.createOrder(order, card_number, expiryDate, cvv, cardHolder);
 
         //빈 Order 객체에 주문 하기 db인 orderBook 객체를 넘김 (orderBook - 주문하기, order - 주문 내역)
         List<OrderBook> orderBooks = orderBookRepository.orderBookList();
-        Order EndOrder = orderService.getOrderByOrderBook(findOrder, orderBooks);
 
-        //order db에 해당 주문이 존재하지 않을 경우 저장
-        if (orderRepository.findByIsbn(EndOrder.getIsbn()) == null) {
-            orderManagementService.saveOrderAndDeleteOrderBook(EndOrder);
+        for (OrderBook orderBook : orderBooks) {
+            try {
+                orderManagementService.processOrder(card_number, expiryDate, cvv, cardHolder, orderBook);
+            }catch (DuplicateOrderException e) {
+                log.error("중복된 주문: {}", e.getMessage());
+                throw new DuplicateOrderException("중복된 주문입니다. 다시 한 번 확인해주세요.");
+            }
         }
-        //존재할 경우 예외 터트림
-        else {
-            throw new DuplicateOrderException("이 상품은 이미 주문되었습니다. 주문 내역을 확인하거나 다른 상품을 선택해주세요.");
-        }
+
         return "redirect:/home";
     }
 
@@ -73,7 +67,6 @@ public class OrderController {
         orderService.deleteOrder(isbn);
         return "redirect:/home";
     }
-
 
 
 }

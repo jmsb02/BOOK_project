@@ -1,8 +1,8 @@
 package Book_Toy_Project.BOOK.Controller;
 
 import Book_Toy_Project.BOOK.Entity.*;
-import Book_Toy_Project.BOOK.Exception.DuplicateIsbnException;
 import Book_Toy_Project.BOOK.Exception.DuplicateOrderException;
+import Book_Toy_Project.BOOK.Exception.DuplicateWishlistException;
 import Book_Toy_Project.BOOK.Service.NaverApiService;
 import Book_Toy_Project.BOOK.Service.WishlistService;
 import lombok.extern.slf4j.Slf4j;
@@ -53,15 +53,15 @@ public class WishlistController {
             // 적절한 응답 반환
             return "redirect:/home";
 
-        } catch (DuplicateIsbnException e) {
+        } catch (DuplicateWishlistException e) {
             // 중복된 ISBN이 발생한 경우 적절한 응답 반환
-            log.error("중복된 ISBN이 발생했습니다: {}", e.getMessage());
-            throw new DuplicateIsbnException("중복된 ISBN입니다.", e);
+            log.error("이미 찜 목록에 상품이 존재합니다.: {}", e.getMessage());
+            throw new DuplicateWishlistException("이미 찜 목록에 상품이 존재합니다.");
 
         } catch (Exception e) {
             // 저장 중에 예외가 발생한 경우 적절한 응답 반환
             log.error("저장 중 예외가 발생하였습니다.");
-            throw new Exception("장바구니에 이미 해당 책이 있습니다. 추가할 수 없습니다.", e);
+            throw new Exception("장바구니에 이미 해당 책이 있습니다.", e);
         }
     }
 

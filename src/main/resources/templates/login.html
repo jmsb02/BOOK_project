@@ -112,6 +112,7 @@
                 <h1 class="h3 mb-3 fw-bold">정보를 입력해주세요</h1> <!-- 제목의 텍스트 중앙 정렬 설정 -->
             </div>
 
+
             <div class="form-floating mb-3">
                 <input type="email" th:field="*{email}" class="form-control" placeholder="name@example.com"
                        th:class="${#fields.hasErrors('email')}? 'form-control fieldError' : 'form-control'">
@@ -123,6 +124,11 @@
                        th:class="${#fields.hasErrors('password')}? 'form-control fieldError' : 'form-control'">
                 <!-- 유효성 검사 오류 메시지를 표시 -->
                 <p th:if="${#fields.hasErrors('password')}" class="text-danger" th:errors="*{password}"></p>
+            </div>
+
+            <div>
+                <!-- 로그인 에러 메시지 표시 -->
+                <p th:if="${loginError}" class="text-danger" th:text="${loginError}"></p>
             </div>
 
             <button type="submit" class="btn btn-primary w-100 py-2 btn-bd-primary">Sign in</button>
