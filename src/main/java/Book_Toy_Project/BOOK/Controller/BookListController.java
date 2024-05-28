@@ -109,7 +109,7 @@ public class BookListController {
         try {
             log.info("Booklist -> orderBook");
             //책 정보를 db에 저장
-            OrderBook orderBook = getOrderBook(book);
+            OrderBook orderBook = orderBookService.getOrderBook(book);
             orderBookService.saveOrderBook(orderBook);
 
             // 적절한 응답 반환
@@ -125,21 +125,6 @@ public class BookListController {
             log.error("저장 중 예외가 발생하였습니다.");
             throw new Exception("저장 중 예외가 발생하였습니다. 다시 한 번 확인해주세요.", e);
         }
-
-    }
-
-    private static OrderBook getOrderBook(Book book) {
-        OrderBook orderBook = new OrderBook();
-        orderBook.setName(book.getTitle());
-        orderBook.setPublisher(book.getPublisher());
-        orderBook.setPrice(book.getPrice());
-        orderBook.setAuthor(book.getAuthor());
-        orderBook.setImage(book.getImage());
-        orderBook.setLink(book.getLink());
-        orderBook.setIsbn(book.getIsbn());
-        orderBook.setCount(1); // 주문 수량은 1로 가정
-        orderBook.setPubdate(book.getPubdate());
-        return orderBook;
     }
 
 }
