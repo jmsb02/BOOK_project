@@ -2,13 +2,16 @@ package Book_Toy_Project.BOOK.Controller;
 
 import Book_Toy_Project.BOOK.Entity.OrderBook;
 import Book_Toy_Project.BOOK.Exception.DuplicateOrderException;
+import Book_Toy_Project.BOOK.Exception.OrderBooknotFoundException;
 import Book_Toy_Project.BOOK.Repository.OrderBookRepository;
+import Book_Toy_Project.BOOK.Service.OrderBookService;
 import Book_Toy_Project.BOOK.Service.OrderManagementService;
 import Book_Toy_Project.BOOK.Service.OrderService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +29,8 @@ public class OrderController {
 
 
     private final OrderBookRepository orderBookRepository;
+
+    private final OrderBookService orderBookService;
 
     //주문하기
     @PostMapping("/saveOrder")
@@ -58,6 +63,25 @@ public class OrderController {
         }
 
         return "redirect:/home";
+    }
+
+    //홈 화면에서 db에 값이 있을 경우 바로 접근
+    @GetMapping("home/mypage/orders")
+    public String OrderBookPage(Model model) {
+
+        log.info("주문하기 화면으로 이동합니다.");
+        List<OrderBook> orderBooks = orderBookRepository.orderBookList();
+        log.info("orderBooks={}", orderBooks);
+
+        int totalOrderAmount = orderBookService.calculateTotalOrderAmount(orderBooks);
+
+        if (orderBooks != null && !orderBooks.isEmpty()) {
+            model.addAttribute("orderBooks", orderBooks);
+            model.addAttribute("totalOrderAmount", totalOrderAmount);
+            return "home/mypage/orders";
+        } else {
+            throw new OrderBooknotFoundException("장바구니에 상품이 존재하지 않습니다.");
+        }
     }
 
 

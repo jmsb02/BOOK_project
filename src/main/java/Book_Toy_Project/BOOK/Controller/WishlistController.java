@@ -84,7 +84,6 @@ public class WishlistController {
         }
     }
 
-
     @GetMapping("/delete_wishlist")
     public String delete_wishlist(@RequestParam("isbn") String isbn) {
         wishlistService.deleteWishlist(isbn);
