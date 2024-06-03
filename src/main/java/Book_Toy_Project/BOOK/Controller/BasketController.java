@@ -68,7 +68,7 @@ public class BasketController {
         }
     }
 
-    @GetMapping("/fromBasketToOrders")
+    @GetMapping("/fromBasketToOrderBooks")
     public String FromBasketToOrderBook(@RequestParam("isbn") String isbn) {
         log.info("FromBasketToOrderBook");
         try {
