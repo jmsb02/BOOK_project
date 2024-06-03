@@ -37,7 +37,7 @@ public class OrderBookController {
             model.addAttribute("totalOrderAmount", totalOrderAmount);
             return "home/mypage/orders";
         } else {
-            throw new OrderBooknotFoundException("장바구니에 상품이 존재하지 않습니다.");
+            throw new OrderBooknotFoundException("상품이 존재하지 않습니다.");
         }
     }
 

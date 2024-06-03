@@ -9,7 +9,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -53,7 +52,7 @@ public class OrderController {
         for (OrderBook orderBook : orderBooks) {
             try {
                 orderManagementService.processOrder(card_number, expiryDate, cvv, cardHolder, orderBook);
-            }catch (DuplicateOrderException e) {
+            } catch (DuplicateOrderException e) {
                 log.error("중복된 주문: {}", e.getMessage());
                 throw new DuplicateOrderException("중복된 주문입니다. 다시 한 번 확인해주세요.");
             }
@@ -61,8 +60,6 @@ public class OrderController {
 
         return "redirect:/home";
     }
-
-
 
 
     @GetMapping("/delete_order")
