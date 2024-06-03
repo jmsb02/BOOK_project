@@ -12,8 +12,5 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     void deleteByIsbn(String isbn);
 
-    @Query("select case when count(b) > 0 THEN true else false end" +
-            " from Book b where b.isbn =: isbn")
-    boolean checkDuplicatefindByIsbn(String isbn);
 
 }
