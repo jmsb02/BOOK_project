@@ -31,7 +31,7 @@ public class BasketController {
     private WishlistService wishlistService;
 
 
-    // isbn을 통해 찾은 book을 db에 저장 (web 화면 : from 홈화면 to 장바구니)
+    // isbn을 통해 찾은 book을 db에 저장 (
     @GetMapping("/home/basket")
     public String addToBasket(@RequestParam("isbn") String isbn) throws Exception {
 
