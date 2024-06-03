@@ -84,6 +84,7 @@ public class BasketController {
     //isbn와 찜 목록 버튼을 통해 값 보내주기
     public String FromBasketToWishlist(@RequestParam("isbn") String isbn) {
         try {
+
             log.info("wishlistFromISBN");
 
             wishlistService.addFromBasketToWishlist(isbn);

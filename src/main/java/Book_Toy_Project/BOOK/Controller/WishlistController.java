@@ -66,7 +66,6 @@ public class WishlistController {
     }
 
     /**
-     * html에 isbn 받아서 OrderBook, Book 연관관계 맺고 Repository에 save
      * from wishlist to orderBook-> isbn으로 책 db 저장 후 redirect
      */
     @GetMapping("/saveWishlistToOrderBookRepository")
