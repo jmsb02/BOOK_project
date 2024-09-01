@@ -5,14 +5,14 @@
 링크 : 
 https://velog.io/@jaemm/%EA%B0%9C%EC%9D%B8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EB%AA%85%EC%84%B8%EC%84%9C-%EC%9E%91%EC%84%B1
 
-## 로그인 화면
+## 회원 가입 화면 + Validation 적용
+![image](https://github.com/user-attachments/assets/b2f24e4e-305e-4483-8d20-4a834f45844c)
 
+
+## 로그인 화면
 ![image](https://github.com/user-attachments/assets/2bace273-3949-4c40-8f23-5870373bfffb)
 - Spring Security 적용
 - 밑에 Sign up 버튼을 통해 회원가입 폼으로 이동
-
-## 회원 가입 화면 + Validation 적용
-![image](https://github.com/user-attachments/assets/b2f24e4e-305e-4483-8d20-4a834f45844c)
 
 ## 로그인 성공 -> 홈 화면으로 이동 
 ![image](https://github.com/user-attachments/assets/295bc33d-e81b-439e-ab4e-20c7d4faaf79)
