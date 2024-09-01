@@ -21,6 +21,7 @@ https://velog.io/@jaemm/%EA%B0%9C%EC%9D%B8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-
 ![image](https://github.com/user-attachments/assets/38766457-6bce-406d-a4a5-1beb386a84d1)
 
 ## 홈 화면
+![image](https://github.com/user-attachments/assets/d917dcb9-208f-4122-8ee8-4ba291a14257)
 ![image](https://github.com/user-attachments/assets/85319925-2ca1-49f2-8b8a-618eff15c689)
 
 ## 홈 화면 버튼 (View, Basket, 찜하기 버튼)
